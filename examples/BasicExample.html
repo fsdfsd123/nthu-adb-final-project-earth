@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--NOTE: Most Web WorldWind examples use jquery, Bootstrap and requirejs but those technologies are NOT-->
+    <!--required by Web WorldWind. See SimplestExample.html for an example of using Web WorldWind without them.-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script data-main="BasicExample" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+    <link rel="stylesheet" href="index-styles.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="styles/customized-styles.css"/>
+    <link rel="stylesheet" href="styles/bulma.css"/>
+    <link rel="stylesheet" href="styles/perfect-scrollbar.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" type="text/css">
+    <link rel='stylesheet' href='http://fonts.googleapis.com/icon?family=Material+Icons' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="side-bar-dist/sidebar.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.2/materia/bootstrap.min.css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="jrange/jquery.range.css">
+    <script src="jrange/jquery.range.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="jqueryui/style.css">
+</head>
+<style>
+.pretty-select {
+  /*移除箭頭樣式*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+
+  /*改變右邊箭頭樣式*/
+  background: url("arrow.png") no-repeat right center transparent;
+  
+  border:0px;
+  width:100%;
+  height:34px;
+  padding-left:2px;
+  padding-right:40px;
+  background-color:#F6F7F7;
+  color:gray;
+}
+
+/*IE隱藏箭頭樣式*/
+.pretty-select::-ms-expand { 
+  display: none; 
+}
+
+.pretty-select:focus{
+  box-shadow: 0 0 5px 2px #467BF4;    
+}
+#data-content{
+    table-layout: fixed;
+  word-wrap: break-all;
+  word-break: normal;
+  overflow: hidden;
+}
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+/*  text-align: top;
+  text-decoration: none;*/
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+</style>
+  <script>
+  $(function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 15,
+      max: 25,
+      values: [ 15, 25 ],
+      slide: function( event, ui ) {
+        $( "#light_polution" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#light_polution" ).val( "" + $( "#slider-range" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range" ).slider( "values", 1 ) );
+  });
+    $(function() {
+    $( "#slider-range2" ).slider({
+      range: true,
+      min: 0,
+      max: 10,
+      values: [ 0, 10 ],
+      slide: function( event, ui ) {
+        $( "#water_vapor" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#water_vapor" ).val( "" + $( "#slider-range2" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range2" ).slider( "values", 1 ) );
+  });
+        $(function() {
+    $( "#slider-range3" ).slider({
+      range: true,
+      min: 0,
+      max: 1000,
+      values: [ 0, 1000 ],
+      slide: function( event, ui ) {
+        $( "#PI" ).val( "" + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    $( "#PI" ).val( "" + $( "#slider-range3" ).slider( "values", 0 ) +
+      " - " + $( "#slider-range3" ).slider( "values", 1 ) );
+  });
+
+      $(function() {
+    $( "#slider-range-max" ).slider({
+      range: "max",
+      min: 1,
+      max: 500,
+      value: 100,
+      slide: function( event, ui ) {
+        $( "#data_number" ).val( ui.value );
+      }
+    });
+    $( "#data_number" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  });
+
+    // $('#ue_button').on("click", function (e) {
+    //     console.log('ue');
+    //     $('#user-equipment-div').css('visibility', 'visible');
+    //     $('#target-div').css('visibility', 'hidden');
+    // });
+
+    // $('#target_button').on("click", function (e) {
+    //     console.log('target');
+    //     $('#user-equipment-div').css('visibility', 'hidden');
+    //     $('#target-div').css('visibility', 'visible');
+    // });
+
+    function uehideshow(){
+      console.log('hideshow');
+      console.log('ue');
+      $('#user-equipment-div').css('display', 'block');
+      $('#target-div').css('display', 'none');
+      $('#show-data').val('show-equipment');
+    }
+    function targethideshow(){
+        console.log('target');
+        $('#user-equipment-div').css('display', 'none');
+        $('#target-div').css('display', 'block');
+        $('#show-data').val('show-target');
+        console.log('to_dic');
+        if(transfer_dic == false){
+          for (var i=0;i<Project_Target_db.length;i++){
+              //console.log(Project_Target_db[i]['PID']);
+              Project_Target_db_dic[Project_Target_db[i]['PID']] = Project_Target_db[i];
+          }
+          for (var i=0;i<Target_db.length;i++){
+              Target_db_dic[Target_db[i]['TID']] = Target_db[i];
+          }
+          //transfer_dic = true;
+          console.log(Project_Target_db_dic);
+          console.log(Target_db_dic);
+        }
+    }
+
+      // $('#show').click({
+      //   console.log('show');
+      // });
+  </script>
+<body>
+
+<header>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+
+    <!-- title -->
+    <a class="navbar-brand" href="#">equipment and target search</a>
+
+              
+
+ <a class="navbar-brand" href="#">go to </a>
+        <div class="input-group" id="searchBox" style="width:70%;">
+
+            <input type="text" class="form-control" placeholder="" id="searchText" style="margin-right:30px;"/>
+            <span class="input-group-btn">
+                <button id="searchButton" class="btn btn-primary" type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+      
+    <!-- sidebar toggle -->
+    <button class="navbar-toggler btn btn-link border-0" type="button" id="sidebar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+</header>
+<div class="d-flex wrapper wrapper-navbar-used wrapper-navbar-fixed">
+
+  <nav role="navigation" class="sidebar sidebar-bg-dark" id="navigation">
+
+    <!-- sidebar -->
+    <div class="sidebar-menu text-center" style="width: 350px;margin-top: 10%;margin-bottom: 5%;">
+      <input id="ue_button" type="button" class="button" value="user equipment" style="float:left" onclick="uehideshow()">
+      <input id="target_button" type="button" class="button" value="target" style="float:left" onclick="targethideshow()">
+    </div>
+    <div id="user-equipment-div" style="margin-top: 5%;display: none;">
+    <div class="sidebar-menu text-center" style="width: 350px;margin-top: 15%;">
+       
+<!--           <h4 class="my-3 mx-3 text-light" style="text-align: left;">
+          database
+
+          </h4>
+        <select class="pretty-select" style="width: 70%;margin-bottom: 20px;float:left;">
+          <option value="user equipment">user equipment</option>
+          <option value="target">target</option>
+        </select>
+          
+        <select class="pretty-select" style="width: 70%;margin-bottom:  20px;float:left;">
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select> -->
+          <h4 class="my-3 mx-3 text-light" style="text-align: left;">
+          daylight_saving
+          </h4>
+        <select class="pretty-select" id="daylight_saving" style="width: 70%;margin-bottom:  20px;float:left;">
+          <option value="n">no</option>
+          <option value="y">yes</option>
+          <option value="ny">don't care</option>
+        </select>
+
+
+
+<!--         <div class="input-group" id="searchBox" style="width:70%;">
+
+            <input type="text" class="form-control" placeholder="search" id="searchText" style="margin-right:30px;"/>
+            <span class="input-group-btn">
+                <button id="searchButton" class="btn btn-primary" type="button">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div> -->
+
+
+
+
+    </div>
+
+
+
+      <div class="sidebar-menu text-center" style="width: 250px;margin-top: 20%;">
+
+      <h4 class="my-3 mx-3 text-light" style="text-align: left;">light polution</h4>
+                <input type="text" id="light_polution" style="border:0; color:#f6931f; font-weight:bold;float:left;">
+            
+               <br><br>
+              <div id="slider-range"></div>
+
+              <!-- <button style="margin-top: 20%;">search</button> -->
+      </div>
+
+      <div class="sidebar-menu text-center" style="width: 250px;margin-top: 5%;">
+      <h4 class="my-3 mx-3 text-light" style="text-align: left;">water vapor</h4>
+                <input type="text" id="water_vapor" style="border:0; color:#f6931f; font-weight:bold;float:left;">
+            
+               <br><br>
+              <div id="slider-range2"></div>
+
+             <!--  <button style="margin-top: 20%;">search</button> -->
+      </div>
+
+      <div class="sidebar-menu text-center" style="width: 250px;margin-top: 5%;">
+      <h4 class="my-3 mx-3 text-light" style="text-align: left;">time zone</h4>
+              <input type="text" id="time_zone" style="border:0; color:#f6931f; font-weight:bold;float:left;">
+            
+               <br><br>
+              <!-- <div id="slider-range2"></div> -->
+
+             <!--  <button style="margin-top: 20%;">search</button> -->
+      </div>
+
+
+
+  </div>
+
+
+
+  <div id="target-div">
+    
+            <h4 class="my-3 mx-3 text-light" style="text-align: left;">
+          project type
+          </h4>
+        <select class="pretty-select" id="project_type" style="width: 70%;margin-bottom:  20px;">
+          <option value="transient">transient</option>
+          <option value="regular">regular</option>
+          <option value="target_of_opportunity">target_of_opportunity</option>
+          <option value="all">all</option>
+        </select>
+    
+    
+        <h4 class="my-3 mx-3 text-light" style="text-align: left;margin-top: 50px;">
+          mount_type
+        </h4>
+        <select class="pretty-select" id="mount_type" style="width: 70%;margin-bottom:  20px;">
+          <option value="fork">fork</option>
+          <option value="german">german</option>
+          <option value="theodolite">theodolite</option>
+          <option value="all">all</option>
+        </select>
+                <h4 class="my-3 mx-3 text-light" style="text-align: left;margin-top: 50px;">
+          camera_type
+        </h4>
+        <select class="pretty-select" id="camera_type" style="width: 70%;margin-bottom:  20px;">
+          <option value="colored">colored</option>
+          <option value="mono">mono</option>
+          <option value="all">all</option>
+        </select>
+
+
+        <h4 class="my-3 mx-3 text-light" style="text-align: left;">PI</h4>
+            <input type="text" id="PI" style="border:0; color:#f6931f; font-weight:bold;float:left;">
+        
+           <br><br>
+          <div id="slider-range3" style="width: 250px;"></div>
+
+             <!--  <button style="margin-top: 20%;">search</button> -->
+   
+     
+  </div>
+
+      <div class="sidebar-menu text-center" style="width: 250px;margin-top: 5%;">
+        <h4 class="my-3 mx-3 text-light" style="text-align: left;">data number</h4>
+        <p>
+          <input type="text" id="data_number" style="border:0; color:#f6931f; font-weight:bold;float:left;">
+        </p>
+        <br><br>
+        <div id="slider-range-max" ></div>
+      </div>
+      <input type="button" class="button" value="show-equipment" id="show-data" style="margin-top: 10%;text-align: center;">
+
+
+
+      <div class="sidebar-menu text-center" style="width: 350px;margin-top: 10%;">
+        <h4 class="my-3 mx-3 text-light" style="text-align: left;">chosen data content:</h4>
+        <h4 class="my-3 mx-3 text-light" style="text-align: left;"id="data-content"></h4>
+      </div>
+  </nav>
+</div>
+
+ <canvas id="canvasOne"  width="1000" height="1000" style="position: fixed; left: 20%; top: 10%; width: 80%; height: 100%; z-index: 100;">
+      Your browser does not support HTML5 Canvas.
+  </canvas>
+
+
+
+</body>
+</html>
+
+
